@@ -1,11 +1,11 @@
-# @treeviz/cli
+# treeviz-cli
 
 Generate ASCII directory trees from the terminal. Zero dependencies, powered by Bun.
 
 ## Installation
 
 ```bash
-bun add -g @treeviz/cli
+bun add -g treeviz-cli
 ```
 
 ## Usage

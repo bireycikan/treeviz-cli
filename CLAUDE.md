@@ -1,7 +1,7 @@
-# @treeviz/cli
+# treeviz-cli
 
 ## Overview
-CLI tool that generates ASCII directory trees from the terminal. Standalone package published as `@treeviz/cli` on npm. Zero dependencies, powered by Bun.
+CLI tool that generates ASCII directory trees from the terminal. Standalone package published as `treeviz-cli` on npm. Zero dependencies, powered by Bun.
 
 ## Tech
 - **Runtime**: Bun

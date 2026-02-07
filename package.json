@@ -1,5 +1,5 @@
 {
-  "name": "@treeviz/cli",
+  "name": "treeviz-cli",
   "version": "1.0.0",
   "description": "Generate ASCII directory trees from the terminal",
   "type": "module",

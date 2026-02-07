@@ -44,4 +44,4 @@ treeviz --copy
 
 ## Web Version
 
-Try the browser-based version at [treeviz.dev](https://treeviz.dev) — select a folder and get the same output with zero uploads.
+Try the browser-based version at [treeviz.dev](https://treeviz.birey.dev) — select a folder and get the same output with zero uploads.

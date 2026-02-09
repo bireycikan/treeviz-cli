@@ -1,6 +1,6 @@
 {
   "name": "treeviz-cli",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Generate ASCII directory trees from the terminal",
   "type": "module",
   "bin": {

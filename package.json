@@ -9,6 +9,7 @@
   "scripts": {
     "dev": "bun run src/index.ts",
     "build": "bun build ./src/index.ts --outdir ./dist --target node",
+    "lint": "eslint .",
     "format": "prettier --write \"**/*.{ts,js,mjs,json,md}\"",
     "prepare": "husky"
   },
@@ -32,9 +33,12 @@
     "url": "https://github.com/bireycikan/treeviz-cli/issues"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "bun-types": "^1.3.8",
+    "eslint": "^10.0.0",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.7",
-    "prettier": "^3.8.1"
+    "prettier": "^3.8.1",
+    "typescript-eslint": "^8.54.0"
   }
 }

@@ -10,10 +10,17 @@ CLI tool that generates ASCII directory trees from the terminal. Standalone pack
 
 ## Project Structure
 ```
-src/
-├── index.ts          # Entry point — arg parsing, clipboard, output
-├── tree-generator.ts # fs-based directory traversal + ASCII generation
-└── types.ts          # TreeNode interface
+treeviz-cli/
+├── src/                    # Source code
+│   ├── index.ts            # CLI entrypoint — arg parsing, validation, clipboard, main()
+│   ├── tree-generator.ts   # Core logic — recursive traversal and ASCII tree rendering
+│   └── types.ts            # TypeScript interfaces (TreeNode)
+├── .gitignore              # Git ignore rules
+├── bun.lock                # Bun lockfile
+├── CLAUDE.md               # Project context for Claude Code
+├── package.json            # Package metadata, scripts, and bin config
+├── README.md               # Documentation and usage guide
+└── tsconfig.json           # TypeScript compiler options
 ```
 
 ## Commands

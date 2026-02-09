@@ -5,7 +5,24 @@ Generate ASCII directory trees from the terminal. Zero dependencies, powered by 
 ## Installation
 
 ```bash
+# npm
+npm install -g treeviz-cli
+
+# yarn
+yarn global add treeviz-cli
+
+# pnpm
+pnpm add -g treeviz-cli
+
+# bun
 bun add -g treeviz-cli
+```
+
+Or run it directly without installing:
+
+```bash
+npx treeviz-cli
+bunx treeviz-cli
 ```
 
 ## Usage

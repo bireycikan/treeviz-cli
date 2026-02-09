@@ -7,8 +7,9 @@ import {
   generateAsciiTree,
   DEFAULT_IGNORES,
 } from "./tree-generator";
+import pkg from "../package.json";
 
-const VERSION = "1.0.0";
+const VERSION = pkg.version;
 
 const HELP = `
 treeviz - Generate ASCII directory trees

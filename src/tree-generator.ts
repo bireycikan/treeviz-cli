@@ -24,7 +24,10 @@ export function traverseDirectory(
     if (ignoreList.includes(entry.name)) continue;
 
     if (entry.isDirectory()) {
-      const childNode = traverseDirectory(join(dirPath, entry.name), ignoreList);
+      const childNode = traverseDirectory(
+        join(dirPath, entry.name),
+        ignoreList
+      );
       children.push(childNode);
     } else {
       children.push({ name: entry.name, type: "file" });

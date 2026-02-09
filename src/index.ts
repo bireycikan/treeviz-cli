@@ -75,7 +75,7 @@ function parseArgs(argv: string[]) {
         console.error("Error: --ignore requires a value");
         process.exit(1);
       }
-      extraIgnores = next.split(",").map((s) => s.trim());
+      extraIgnores = next.split(",").map(s => s.trim());
       continue;
     }
 
@@ -128,7 +128,9 @@ function main() {
         execSync("xclip -selection clipboard", { input: output });
         console.log("\n✓ Copied to clipboard");
       } catch {
-        console.error("\n✗ Could not copy to clipboard (pbcopy/xclip not found)");
+        console.error(
+          "\n✗ Could not copy to clipboard (pbcopy/xclip not found)"
+        );
       }
     }
   }

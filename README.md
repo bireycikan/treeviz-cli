@@ -29,14 +29,14 @@ treeviz --copy
 
 ## Options
 
-| Option | Alias | Description |
-|--------|-------|-------------|
-| `[path]` | | Directory to visualize (default: `.`) |
-| `--ignore <folders>` | `-i` | Comma-separated folders to add to ignore list |
-| `--no-default-ignores` | | Disable the default ignore list |
-| `--copy` | `-c` | Copy output to clipboard |
-| `--help` | `-h` | Show help |
-| `--version` | `-v` | Show version |
+| Option                 | Alias | Description                                   |
+| ---------------------- | ----- | --------------------------------------------- |
+| `[path]`               |       | Directory to visualize (default: `.`)         |
+| `--ignore <folders>`   | `-i`  | Comma-separated folders to add to ignore list |
+| `--no-default-ignores` |       | Disable the default ignore list               |
+| `--copy`               | `-c`  | Copy output to clipboard                      |
+| `--help`               | `-h`  | Show help                                     |
+| `--version`            | `-v`  | Show version                                  |
 
 ## Default Ignores
 

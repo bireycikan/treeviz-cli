@@ -1,6 +1,7 @@
-#!/usr/bin/env bun
+#!/usr/bin/env node
 
 import { existsSync, statSync } from "fs";
+import { execSync } from "child_process";
 import { resolve } from "path";
 import {
   traverseDirectory,
@@ -92,7 +93,7 @@ function parseArgs(argv: string[]) {
   return { targetPath, extraIgnores, useDefaultIgnores, copyToClipboard };
 }
 
-async function main() {
+function main() {
   const { targetPath, extraIgnores, useDefaultIgnores, copyToClipboard } =
     parseArgs(process.argv);
 
@@ -120,22 +121,11 @@ async function main() {
 
   if (copyToClipboard) {
     try {
-      const proc = Bun.spawn(["pbcopy"], {
-        stdin: "pipe",
-      });
-      proc.stdin.write(output);
-      proc.stdin.end();
-      await proc.exited;
+      execSync("pbcopy", { input: output });
       console.log("\n✓ Copied to clipboard");
     } catch {
-      // Fallback for Linux
       try {
-        const proc = Bun.spawn(["xclip", "-selection", "clipboard"], {
-          stdin: "pipe",
-        });
-        proc.stdin.write(output);
-        proc.stdin.end();
-        await proc.exited;
+        execSync("xclip -selection clipboard", { input: output });
         console.log("\n✓ Copied to clipboard");
       } catch {
         console.error("\n✗ Could not copy to clipboard (pbcopy/xclip not found)");

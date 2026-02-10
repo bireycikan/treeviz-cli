@@ -42,7 +42,16 @@ treeviz --no-default-ignores
 
 # Copy output to clipboard
 treeviz --copy
+
+# Update to the latest version
+treeviz update
 ```
+
+## Commands
+
+| Command  | Description                              |
+| -------- | ---------------------------------------- |
+| `update` | Update treeviz-cli to the latest version |
 
 ## Options
 

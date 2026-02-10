@@ -21,6 +21,9 @@ Usage:
 Arguments:
   path                    Directory to visualize (default: current directory)
 
+Commands:
+  update                  Update treeviz-cli to the latest version
+
 Options:
   -i, --ignore <folders>  Comma-separated folders to ignore (added to defaults)
   --no-default-ignores    Disable the default ignore list
@@ -39,6 +42,31 @@ Examples:
   treeviz --copy
 `.trim();
 
+function update() {
+  const currentVersion = VERSION;
+  console.log(`Current version: ${currentVersion}`);
+  console.log("Checking for updates to latest version...");
+
+  try {
+    const latest = execSync("npm view treeviz-cli version", {
+      encoding: "utf-8",
+    }).trim();
+
+    if (latest === currentVersion) {
+      console.log(`Already on the latest version (${currentVersion}).`);
+      process.exit(0);
+    }
+
+    execSync("npm install -g treeviz-cli@latest", { stdio: "pipe" });
+    console.log(
+      `Successfully updated from ${currentVersion} to version ${latest}`
+    );
+  } catch {
+    console.error("Error: Failed to update treeviz-cli.");
+    process.exit(1);
+  }
+}
+
 function parseArgs(argv: string[]) {
   const args = argv.slice(2);
   let targetPath = ".";
@@ -48,6 +76,11 @@ function parseArgs(argv: string[]) {
 
   for (let i = 0; i < args.length; i++) {
     const arg = args[i];
+
+    if (arg === "update") {
+      update();
+      process.exit(0);
+    }
 
     if (arg === "-h" || arg === "--help") {
       console.log(HELP);

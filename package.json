@@ -9,6 +9,7 @@
   "scripts": {
     "dev": "bun run src/index.ts",
     "build": "bun build ./src/index.ts --outdir ./dist --target node",
+    "test": "bun test",
     "lint": "eslint .",
     "format": "prettier --write \"**/*.{ts,js,mjs,json,md}\"",
     "prepare": "husky"

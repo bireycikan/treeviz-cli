@@ -3,8 +3,8 @@
  * @type {import('lint-staged').Configuration}
  */
 const config = {
-  "*.{ts,js,mjs}": ["eslint --fix"],
-  "*": [() => "bun run format"],
+  "*.{ts,js,mjs}": ["eslint --fix", () => "bun test"],
+  "*": [() => "bun run format", "git add"],
 };
 
 export default config;

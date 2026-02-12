@@ -38,7 +38,7 @@ treeviz-cli/
 - `traverseDirectory` uses `fs.readdirSync` with `{ withFileTypes: true }` for sync recursive traversal
 - Sorting: directories first, then alphabetical
 - Clipboard: `pbcopy` (macOS) with `xclip` fallback (Linux)
-- Default ignores: `node_modules`, `.git`, `.next`, `.husky`, `.turbo`, `dist`, `build`, `.DS_Store`
+- Default ignores: `node_modules`, `.claude`, `.git`, `.next`, `.husky`, `.turbo`, `dist`, `build`, `.DS_Store`
 
 ## CLI Flags
 

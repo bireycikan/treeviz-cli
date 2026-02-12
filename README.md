@@ -66,7 +66,7 @@ treeviz update
 
 ## Default Ignores
 
-`node_modules`, `.git`, `.next`, `.husky`, `.turbo`, `dist`, `build`, `.DS_Store`
+`node_modules`, `.claude`, `.git`, `.next`, `.husky`, `.turbo`, `dist`, `build`, `.DS_Store`
 
 ## Web Version
 

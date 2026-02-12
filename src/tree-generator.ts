@@ -4,6 +4,7 @@ import type { TreeNode } from "./types";
 
 export const DEFAULT_IGNORES = [
   "node_modules",
+  ".claude",
   ".git",
   ".next",
   ".husky",

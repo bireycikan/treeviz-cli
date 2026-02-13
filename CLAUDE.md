@@ -14,28 +14,37 @@ CLI tool that generates ASCII directory trees from the terminal. Standalone pack
 
 ```
 treeviz-cli/
-├── src/                    # Source code
+├── .github/
+│   └── workflows/
+│       └── publish.yml         # CI/CD publish workflow
+├── .vscode/
+│   └── settings.json           # VS Code workspace settings
+├── src/                        # Source code
 │   ├── commands/
-│   │   └── update.ts       # Self-update command
-│   ├── cli.ts              # Arg parsing, help text, version display
-│   ├── clipboard.ts        # Clipboard copy (pbcopy/xclip)
-│   ├── formatters.ts       # ASCII, JSON, and Markdown tree formatters
-│   ├── index.ts            # CLI entrypoint — main() orchestration
-│   ├── traverser.ts        # Recursive directory traversal, ignores, entry limit
-│   └── types.ts            # TypeScript interfaces (TreeNode)
-├── tests/                  # Test files
-│   ├── ascii-tree.test.ts  # ASCII rendering tests
-│   ├── depth.test.ts       # Depth limiting tests
-│   ├── format.test.ts      # JSON/Markdown format tests
-│   ├── security.test.ts    # Max entry limit tests
-│   ├── symlink.test.ts     # Symlink safety tests
-│   └── traversal.test.ts   # Directory traversal tests
-├── .gitignore              # Git ignore rules
-├── bun.lock                # Bun lockfile
-├── CLAUDE.md               # Project context for Claude Code
-├── package.json            # Package metadata, scripts, and bin config
-├── README.md               # Documentation and usage guide
-└── tsconfig.json           # TypeScript compiler options
+│   │   └── update.ts           # Self-update command
+│   ├── cli.ts                  # Arg parsing, help text, version display
+│   ├── clipboard.ts            # Clipboard copy (pbcopy/xclip)
+│   ├── formatters.ts           # ASCII, JSON, and Markdown tree formatters
+│   ├── index.ts                # CLI entrypoint — main() orchestration
+│   ├── traverser.ts            # Recursive directory traversal, ignores, entry limit
+│   └── types.ts                # TypeScript interfaces (TreeNode)
+├── tests/                      # Test files
+│   ├── ascii-tree.test.ts      # ASCII rendering tests
+│   ├── depth.test.ts           # Depth limiting tests
+│   ├── format.test.ts          # JSON/Markdown format tests
+│   ├── security.test.ts        # Max entry limit tests
+│   ├── symlink.test.ts         # Symlink safety tests
+│   └── traversal.test.ts       # Directory traversal tests
+├── .gitignore                  # Git ignore rules
+├── bun.lock                    # Bun lockfile
+├── CHANGELOG.md                # Release changelog
+├── CLAUDE.md                   # Project context for Claude Code
+├── eslint.config.mjs           # ESLint configuration
+├── lint-staged.config.mjs      # Lint-staged configuration
+├── package.json                # Package metadata, scripts, and bin config
+├── prettier.config.mjs         # Prettier configuration
+├── README.md                   # Documentation and usage guide
+└── tsconfig.json               # TypeScript compiler options
 ```
 
 ## Commands

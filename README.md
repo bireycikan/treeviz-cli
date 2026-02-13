@@ -34,6 +34,9 @@ treeviz
 # Specific path
 treeviz ./src
 
+# Limit depth
+treeviz --depth 2
+
 # Add custom ignores
 treeviz --ignore .env,coverage
 
@@ -58,6 +61,7 @@ treeviz update
 | Option                 | Alias | Description                                   |
 | ---------------------- | ----- | --------------------------------------------- |
 | `[path]`               |       | Directory to visualize (default: `.`)         |
+| `--depth <n>`          | `-d`  | Limit directory traversal depth               |
 | `--ignore <folders>`   | `-i`  | Comma-separated folders to add to ignore list |
 | `--no-default-ignores` |       | Disable the default ignore list               |
 | `--copy`               | `-c`  | Copy output to clipboard                      |

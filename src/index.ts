@@ -25,6 +25,7 @@ Commands:
   update                  Update treeviz-cli to the latest version
 
 Options:
+  -d, --depth <n>         Limit directory traversal depth
   -i, --ignore <folders>  Comma-separated folders to ignore (added to defaults)
   --no-default-ignores    Disable the default ignore list
   -c, --copy              Copy output to clipboard
@@ -37,6 +38,7 @@ Default ignores:
 Examples:
   treeviz
   treeviz ./src
+  treeviz --depth 2
   treeviz --ignore .env,coverage
   treeviz --no-default-ignores
   treeviz --copy
@@ -73,6 +75,7 @@ function parseArgs(argv: string[]) {
   let extraIgnores: string[] = [];
   let useDefaultIgnores = true;
   let copyToClipboard = false;
+  let maxDepth = Infinity;
 
   for (let i = 0; i < args.length; i++) {
     const arg = args[i];
@@ -102,6 +105,16 @@ function parseArgs(argv: string[]) {
       continue;
     }
 
+    if (arg === "-d" || arg === "--depth") {
+      const next = args[++i];
+      if (!next || isNaN(Number(next)) || Number(next) < 0) {
+        console.error("Error: --depth requires a non-negative integer");
+        process.exit(1);
+      }
+      maxDepth = parseInt(next, 10);
+      continue;
+    }
+
     if (arg === "-i" || arg === "--ignore") {
       const next = args[++i];
       if (!next) {
@@ -123,12 +136,23 @@ function parseArgs(argv: string[]) {
     process.exit(1);
   }
 
-  return { targetPath, extraIgnores, useDefaultIgnores, copyToClipboard };
+  return {
+    targetPath,
+    extraIgnores,
+    useDefaultIgnores,
+    copyToClipboard,
+    maxDepth,
+  };
 }
 
 function main() {
-  const { targetPath, extraIgnores, useDefaultIgnores, copyToClipboard } =
-    parseArgs(process.argv);
+  const {
+    targetPath,
+    extraIgnores,
+    useDefaultIgnores,
+    copyToClipboard,
+    maxDepth,
+  } = parseArgs(process.argv);
 
   const fullPath = resolve(targetPath);
 
@@ -147,7 +171,7 @@ function main() {
     ...extraIgnores,
   ];
 
-  const tree = traverseDirectory(fullPath, ignoreList);
+  const tree = traverseDirectory(fullPath, ignoreList, maxDepth);
   const output = generateAsciiTree(tree);
 
   console.log(output);

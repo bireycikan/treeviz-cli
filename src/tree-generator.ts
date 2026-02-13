@@ -16,7 +16,9 @@ export const DEFAULT_IGNORES = [
 
 export function traverseDirectory(
   dirPath: string,
-  ignoreList: string[] = DEFAULT_IGNORES
+  ignoreList: string[] = DEFAULT_IGNORES,
+  maxDepth: number = Infinity,
+  currentDepth: number = 0
 ): TreeNode {
   const entries = readdirSync(dirPath, { withFileTypes: true });
   const children: TreeNode[] = [];
@@ -25,11 +27,17 @@ export function traverseDirectory(
     if (ignoreList.includes(entry.name)) continue;
 
     if (entry.isDirectory()) {
-      const childNode = traverseDirectory(
-        join(dirPath, entry.name),
-        ignoreList
-      );
-      children.push(childNode);
+      if (currentDepth < maxDepth) {
+        const childNode = traverseDirectory(
+          join(dirPath, entry.name),
+          ignoreList,
+          maxDepth,
+          currentDepth + 1
+        );
+        children.push(childNode);
+      } else {
+        children.push({ name: entry.name, type: "directory" });
+      }
     } else {
       children.push({ name: entry.name, type: "file" });
     }

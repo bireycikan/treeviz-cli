@@ -6,6 +6,8 @@ import { resolve } from "path";
 import {
   traverseDirectory,
   generateAsciiTree,
+  generateJsonTree,
+  generateMarkdownTree,
   DEFAULT_IGNORES,
 } from "./tree-generator";
 import pkg from "../package.json";
@@ -25,6 +27,7 @@ Commands:
   update                  Update treeviz-cli to the latest version
 
 Options:
+  -f, --format <type>     Output format: ascii (default), json, markdown
   -d, --depth <n>         Limit directory traversal depth
   -i, --ignore <folders>  Comma-separated folders to ignore (added to defaults)
   --no-default-ignores    Disable the default ignore list
@@ -40,6 +43,8 @@ Examples:
   treeviz
   treeviz ./src
   treeviz --depth 2
+  treeviz --format json
+  treeviz --format markdown
   treeviz --ignore .env,coverage
   treeviz --no-default-ignores
   treeviz --copy
@@ -78,6 +83,7 @@ function parseArgs(argv: string[]) {
   let copyToClipboard = false;
   let maxDepth = Infinity;
   let followSymlinks = false;
+  let format = "ascii";
 
   for (let i = 0; i < args.length; i++) {
     const arg = args[i];
@@ -109,6 +115,19 @@ function parseArgs(argv: string[]) {
 
     if (arg === "--follow-symlinks") {
       followSymlinks = true;
+      continue;
+    }
+
+    if (arg === "-f" || arg === "--format") {
+      const next = args[++i];
+      const validFormats = ["ascii", "json", "markdown"];
+      if (!next || !validFormats.includes(next)) {
+        console.error(
+          `Error: --format requires one of: ${validFormats.join(", ")}`
+        );
+        process.exit(1);
+      }
+      format = next;
       continue;
     }
 
@@ -150,6 +169,7 @@ function parseArgs(argv: string[]) {
     copyToClipboard,
     maxDepth,
     followSymlinks,
+    format,
   };
 }
 
@@ -161,6 +181,7 @@ function main() {
     copyToClipboard,
     maxDepth,
     followSymlinks,
+    format,
   } = parseArgs(process.argv);
 
   const fullPath = resolve(targetPath);
@@ -187,7 +208,18 @@ function main() {
     0,
     followSymlinks
   );
-  const output = generateAsciiTree(tree);
+
+  let output: string;
+  switch (format) {
+    case "json":
+      output = generateJsonTree(tree);
+      break;
+    case "markdown":
+      output = generateMarkdownTree(tree);
+      break;
+    default:
+      output = generateAsciiTree(tree);
+  }
 
   console.log(output);
 

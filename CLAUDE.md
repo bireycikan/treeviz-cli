@@ -43,6 +43,7 @@ treeviz-cli/
 ## CLI Flags
 
 - `[path]` — directory to visualize (default: `.`)
+- `-f, --format <type>` — output format: `ascii` (default), `json`, `markdown`
 - `-d, --depth <n>` — limit directory traversal depth
 - `-i, --ignore <folders>` — comma-separated additional ignores
 - `--no-default-ignores` — disable default ignore list

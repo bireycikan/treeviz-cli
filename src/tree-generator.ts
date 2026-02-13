@@ -88,6 +88,36 @@ export function traverseDirectory(
   };
 }
 
+export function generateJsonTree(node: TreeNode): string {
+  return JSON.stringify(node, null, 2);
+}
+
+export function generateMarkdownTree(
+  node: TreeNode,
+  indent: number = 0,
+  isRoot: boolean = true
+): string {
+  let result = "";
+  const prefix = "  ".repeat(indent);
+
+  if (isRoot) {
+    result += `- ${node.name}/\n`;
+  }
+
+  const children = node.children ?? [];
+
+  for (const child of children) {
+    const suffix = child.type === "directory" ? "/" : "";
+    result += `${prefix}- ${child.name}${suffix}\n`;
+
+    if (child.type === "directory" && child.children?.length) {
+      result += generateMarkdownTree(child, indent + 1, false);
+    }
+  }
+
+  return result;
+}
+
 export function generateAsciiTree(
   node: TreeNode,
   prefix: string = "",

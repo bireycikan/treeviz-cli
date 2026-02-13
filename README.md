@@ -37,6 +37,12 @@ treeviz ./src
 # Limit depth
 treeviz --depth 2
 
+# Output as JSON
+treeviz --format json
+
+# Output as Markdown
+treeviz --format markdown
+
 # Add custom ignores
 treeviz --ignore .env,coverage
 
@@ -64,6 +70,7 @@ treeviz update
 | Option                 | Alias | Description                                   |
 | ---------------------- | ----- | --------------------------------------------- |
 | `[path]`               |       | Directory to visualize (default: `.`)         |
+| `--format <type>`      | `-f`  | Output format: `ascii`, `json`, `markdown`    |
 | `--depth <n>`          | `-d`  | Limit directory traversal depth               |
 | `--ignore <folders>`   | `-i`  | Comma-separated folders to add to ignore list |
 | `--no-default-ignores` |       | Disable the default ignore list               |

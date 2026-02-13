@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-import { existsSync, statSync } from "fs";
-import { execSync } from "child_process";
+import { existsSync, statSync, realpathSync } from "fs";
+import { spawnSync } from "child_process";
 import { resolve } from "path";
 import {
   traverseDirectory,
@@ -56,16 +56,31 @@ function update() {
   console.log("Checking for updates to latest version...");
 
   try {
-    const latest = execSync("npm view treeviz-cli version", {
+    const viewResult = spawnSync("npm", ["view", "treeviz-cli", "version"], {
       encoding: "utf-8",
-    }).trim();
+    });
+
+    if (viewResult.status !== 0) {
+      throw new Error("Failed to check version");
+    }
+
+    const latest = viewResult.stdout.trim();
 
     if (latest === currentVersion) {
       console.log(`Already on the latest version (${currentVersion}).`);
       process.exit(0);
     }
 
-    execSync("npm install -g treeviz-cli@latest", { stdio: "pipe" });
+    const installResult = spawnSync(
+      "npm",
+      ["install", "-g", "treeviz-cli@latest"],
+      { stdio: "pipe" }
+    );
+
+    if (installResult.status !== 0) {
+      throw new Error("Failed to install");
+    }
+
     console.log(
       `Successfully updated from ${currentVersion} to version ${latest}`
     );
@@ -196,6 +211,15 @@ function main() {
     process.exit(1);
   }
 
+  // Path traversal protection: ensure the resolved path doesn't escape via symlinks
+  const realPath = realpathSync(fullPath);
+  if (realPath !== fullPath && !realPath.startsWith(resolve("."))) {
+    console.error(
+      `Error: Path resolves outside the current directory: ${realPath}`
+    );
+    process.exit(1);
+  }
+
   const ignoreList = [
     ...(useDefaultIgnores ? DEFAULT_IGNORES : []),
     ...extraIgnores,
@@ -224,14 +248,16 @@ function main() {
   console.log(output);
 
   if (copyToClipboard) {
-    try {
-      execSync("pbcopy", { input: output });
+    const pbcopy = spawnSync("pbcopy", [], { input: output });
+    if (pbcopy.status === 0) {
       console.log("\n✓ Copied to clipboard");
-    } catch {
-      try {
-        execSync("xclip -selection clipboard", { input: output });
+    } else {
+      const xclip = spawnSync("xclip", ["-selection", "clipboard"], {
+        input: output,
+      });
+      if (xclip.status === 0) {
         console.log("\n✓ Copied to clipboard");
-      } catch {
+      } else {
         console.error(
           "\n✗ Could not copy to clipboard (pbcopy/xclip not found)"
         );

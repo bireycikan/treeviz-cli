@@ -14,13 +14,16 @@ export const DEFAULT_IGNORES = [
   ".DS_Store",
 ];
 
+export const MAX_ENTRIES = 10_000;
+
 export function traverseDirectory(
   dirPath: string,
   ignoreList: string[] = DEFAULT_IGNORES,
   maxDepth: number = Infinity,
   currentDepth: number = 0,
   followSymlinks: boolean = false,
-  visitedPaths: Set<string> = new Set()
+  visitedPaths: Set<string> = new Set(),
+  entryCount: { value: number } = { value: 0 }
 ): TreeNode {
   // Seed the visited set with the initial directory to detect cycles back to root
   if (followSymlinks && visitedPaths.size === 0) {
@@ -32,6 +35,15 @@ export function traverseDirectory(
 
   for (const entry of entries) {
     if (ignoreList.includes(entry.name)) continue;
+
+    // Max entry limit to prevent resource exhaustion
+    if (entryCount.value >= MAX_ENTRIES) {
+      console.error(
+        `Warning: Entry limit reached (${MAX_ENTRIES}). Tree output is truncated.`
+      );
+      break;
+    }
+    entryCount.value++;
 
     const fullPath = join(dirPath, entry.name);
 
@@ -60,7 +72,8 @@ export function traverseDirectory(
             maxDepth,
             currentDepth + 1,
             followSymlinks,
-            visitedPaths
+            visitedPaths,
+            entryCount
           );
           children.push(childNode);
         } catch {

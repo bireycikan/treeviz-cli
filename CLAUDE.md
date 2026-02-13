@@ -46,6 +46,7 @@ treeviz-cli/
 - `-d, --depth <n>` — limit directory traversal depth
 - `-i, --ignore <folders>` — comma-separated additional ignores
 - `--no-default-ignores` — disable default ignore list
+- `--follow-symlinks` — follow symbolic links (skipped by default)
 - `-c, --copy` — copy output to clipboard
 - `-h, --help` / `-v, --version`
 

@@ -43,6 +43,9 @@ treeviz --ignore .env,coverage
 # Disable default ignores
 treeviz --no-default-ignores
 
+# Follow symbolic links (skipped by default)
+treeviz --follow-symlinks
+
 # Copy output to clipboard
 treeviz --copy
 
@@ -64,6 +67,7 @@ treeviz update
 | `--depth <n>`          | `-d`  | Limit directory traversal depth               |
 | `--ignore <folders>`   | `-i`  | Comma-separated folders to add to ignore list |
 | `--no-default-ignores` |       | Disable the default ignore list               |
+| `--follow-symlinks`    |       | Follow symbolic links (skipped by default)    |
 | `--copy`               | `-c`  | Copy output to clipboard                      |
 | `--help`               | `-h`  | Show help                                     |
 | `--version`            | `-v`  | Show version                                  |

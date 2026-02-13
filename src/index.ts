@@ -28,6 +28,7 @@ Options:
   -d, --depth <n>         Limit directory traversal depth
   -i, --ignore <folders>  Comma-separated folders to ignore (added to defaults)
   --no-default-ignores    Disable the default ignore list
+  --follow-symlinks       Follow symbolic links (skipped by default)
   -c, --copy              Copy output to clipboard
   -h, --help              Show this help message
   -v, --version           Show version
@@ -76,6 +77,7 @@ function parseArgs(argv: string[]) {
   let useDefaultIgnores = true;
   let copyToClipboard = false;
   let maxDepth = Infinity;
+  let followSymlinks = false;
 
   for (let i = 0; i < args.length; i++) {
     const arg = args[i];
@@ -102,6 +104,11 @@ function parseArgs(argv: string[]) {
 
     if (arg === "-c" || arg === "--copy") {
       copyToClipboard = true;
+      continue;
+    }
+
+    if (arg === "--follow-symlinks") {
+      followSymlinks = true;
       continue;
     }
 
@@ -142,6 +149,7 @@ function parseArgs(argv: string[]) {
     useDefaultIgnores,
     copyToClipboard,
     maxDepth,
+    followSymlinks,
   };
 }
 
@@ -152,6 +160,7 @@ function main() {
     useDefaultIgnores,
     copyToClipboard,
     maxDepth,
+    followSymlinks,
   } = parseArgs(process.argv);
 
   const fullPath = resolve(targetPath);
@@ -171,7 +180,13 @@ function main() {
     ...extraIgnores,
   ];
 
-  const tree = traverseDirectory(fullPath, ignoreList, maxDepth);
+  const tree = traverseDirectory(
+    fullPath,
+    ignoreList,
+    maxDepth,
+    0,
+    followSymlinks
+  );
   const output = generateAsciiTree(tree);
 
   console.log(output);

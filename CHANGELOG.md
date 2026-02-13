@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com),
 and this project adheres to [Semantic Versioning](https://semver.org).
 
+## [1.8.1] - 2026-02-13
+
+### Added
+
+- MIT LICENSE file
+- Comprehensive README rewrite — project motivation, AI workflow examples, output format demos, security details, and contributing guide
+
 ## [1.8.0] - 2026-02-13
 
 ### Added

@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com),
 and this project adheres to [Semantic Versioning](https://semver.org).
 
+## [1.8.0] - 2026-02-13
+
+### Added
+
+- CHANGELOG.md with full version history
+- GitHub Actions workflow for automated npm publishing with trusted publishing (OIDC) and provenance
+- Automated GitHub Release creation from changelog
+
+### Changed
+
+- Reorganized `src/` into focused modules (`cli.ts`, `traverser.ts`, `formatters.ts`, `clipboard.ts`, `commands/update.ts`)
+- Split test suite into separate files per feature (`ascii-tree`, `traversal`, `depth`, `symlink`, `format`, `security`)
+
 ## [1.7.0] - 2026-02-13
 
 ### Added

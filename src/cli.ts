@@ -22,6 +22,7 @@ Options:
   -i, --ignore <folders>  Comma-separated folders to ignore (added to defaults)
   --no-default-ignores    Disable the default ignore list
   --follow-symlinks       Follow symbolic links (skipped by default)
+  -o, --output <file>     Write output to a file
   -c, --copy              Copy output to clipboard
   -h, --help              Show this help message
   -v, --version           Show version
@@ -37,6 +38,7 @@ Examples:
   treeviz --format markdown
   treeviz --ignore .env,coverage
   treeviz --no-default-ignores
+  treeviz --output tree.txt
   treeviz --copy
 `.trim();
 
@@ -49,6 +51,7 @@ export function parseArgs(argv: string[]) {
   let maxDepth = Infinity;
   let followSymlinks = false;
   let format = "ascii";
+  let outputFile = "";
 
   for (let i = 0; i < args.length; i++) {
     const arg = args[i];
@@ -96,6 +99,16 @@ export function parseArgs(argv: string[]) {
       continue;
     }
 
+    if (arg === "-o" || arg === "--output") {
+      const next = args[++i];
+      if (!next) {
+        console.error("Error: --output requires a file path");
+        process.exit(1);
+      }
+      outputFile = next;
+      continue;
+    }
+
     if (arg === "-d" || arg === "--depth") {
       const next = args[++i];
       if (!next || isNaN(Number(next)) || Number(next) < 0) {
@@ -135,5 +148,6 @@ export function parseArgs(argv: string[]) {
     maxDepth,
     followSymlinks,
     format,
+    outputFile,
   };
 }

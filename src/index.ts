@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { existsSync, statSync, realpathSync } from "fs";
+import { existsSync, statSync, realpathSync, writeFileSync } from "fs";
 import { resolve } from "path";
 import { parseArgs } from "./cli";
 import { traverseDirectory, DEFAULT_IGNORES } from "./traverser";
@@ -20,6 +20,7 @@ function main() {
     maxDepth,
     followSymlinks,
     format,
+    outputFile,
   } = parseArgs(process.argv);
 
   const fullPath = resolve(targetPath);
@@ -69,6 +70,11 @@ function main() {
   }
 
   console.log(output);
+
+  if (outputFile) {
+    writeFileSync(resolve(outputFile), output);
+    console.log(`\n✓ Written to ${outputFile}`);
+  }
 
   if (shouldCopy) {
     copyToClipboard(output);

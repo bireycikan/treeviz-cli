@@ -52,6 +52,9 @@ treeviz --no-default-ignores
 # Follow symbolic links (skipped by default)
 treeviz --follow-symlinks
 
+# Write output to a file
+treeviz --output tree.txt
+
 # Copy output to clipboard
 treeviz --copy
 
@@ -75,6 +78,7 @@ treeviz update
 | `--ignore <folders>`   | `-i`  | Comma-separated folders to add to ignore list |
 | `--no-default-ignores` |       | Disable the default ignore list               |
 | `--follow-symlinks`    |       | Follow symbolic links (skipped by default)    |
+| `--output <file>`      | `-o`  | Write output to a file                        |
 | `--copy`               | `-c`  | Copy output to clipboard                      |
 | `--help`               | `-h`  | Show help                                     |
 | `--version`            | `-v`  | Show version                                  |

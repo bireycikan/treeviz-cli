@@ -60,6 +60,7 @@ treeviz-cli/
 - `-i, --ignore <folders>` — comma-separated additional ignores
 - `--no-default-ignores` — disable default ignore list
 - `--follow-symlinks` — follow symbolic links (skipped by default)
+- `-o, --output <file>` — write output to a file
 - `-c, --copy` — copy output to clipboard
 - `-h, --help` / `-v, --version`
 

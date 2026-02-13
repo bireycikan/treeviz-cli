@@ -2,7 +2,7 @@ import { describe, test, expect, beforeEach, afterEach } from "bun:test";
 import { mkdtempSync, mkdirSync, writeFileSync, rmSync, symlinkSync } from "fs";
 import { join } from "path";
 import { tmpdir } from "os";
-import { traverseDirectory } from "../src/tree-generator";
+import { traverseDirectory } from "../src/traverser";
 
 // =============================================================================
 // traverseDirectory — Symlink safety tests

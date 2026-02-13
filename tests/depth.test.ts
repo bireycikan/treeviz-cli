@@ -2,7 +2,8 @@ import { describe, test, expect, beforeEach, afterEach } from "bun:test";
 import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from "fs";
 import { join } from "path";
 import { tmpdir } from "os";
-import { traverseDirectory, generateAsciiTree } from "../src/tree-generator";
+import { traverseDirectory } from "../src/traverser";
+import { generateAsciiTree } from "../src/formatters";
 
 // =============================================================================
 // traverseDirectory — Depth limiting tests

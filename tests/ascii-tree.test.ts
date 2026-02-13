@@ -1,6 +1,6 @@
 import { describe, test, expect } from "bun:test";
 import type { TreeNode } from "../src/types";
-import { generateAsciiTree } from "../src/tree-generator";
+import { generateAsciiTree } from "../src/formatters";
 
 // =============================================================================
 // generateAsciiTree — Pure unit tests (no filesystem needed)

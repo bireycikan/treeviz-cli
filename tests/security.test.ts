@@ -2,7 +2,7 @@ import { describe, test, expect, beforeEach, afterEach } from "bun:test";
 import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from "fs";
 import { join } from "path";
 import { tmpdir } from "os";
-import { traverseDirectory, MAX_ENTRIES } from "../src/tree-generator";
+import { traverseDirectory, MAX_ENTRIES } from "../src/traverser";
 
 // =============================================================================
 // Security tests

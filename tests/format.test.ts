@@ -4,7 +4,7 @@ import {
   generateAsciiTree,
   generateJsonTree,
   generateMarkdownTree,
-} from "../src/tree-generator";
+} from "../src/formatters";
 
 // =============================================================================
 // Output format tests
